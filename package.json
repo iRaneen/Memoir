@@ -1,0 +1,30 @@
+{
+  "name": "Second-Project_Memoir",
+  "version": "1.0.0",
+  "description": "<p float=\"left\">\r   <img src=\"/Wireframe/HomePage.png\" width=\"400\" Height=\"400\"/>\r   <img src=\"/Wireframe/Profile.png\" width=\"400\" Height=\"400\"/>\r </p>\r <p float=\"left\">\r   <img src=\"/Wireframe/AddNewMemoir.png\" width=\"400\" Height=\"400\"/> \r   <img src=\"/Wireframe/EditMemoir.png\" width=\"400\" Height=\"400\"/> \r </p>\r <p float=\"left\">\r   <img src=\"/Wireframe/LandingPage.png\" width=\"300\" Height=\"300\"/> \r   <img src=\"/Wireframe/SearchResualtsPage.png\" width=\"300\" Height=\"300\"/> \r   <img src=\"/Wireframe/ShowOthersProfile.png\" width=\"300\" Height=\"300\"/> \r </p>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.generalassemb.ly/Lambda/Second-Project_Memoir.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.9.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.11.9"
+  },
+  "devDependencies": {}
+}

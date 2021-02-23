@@ -1,0 +1,136 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Followers</title>
+
+</head>
+
+<body>
+
+
+	<nav class="navbar navbar-expand-md navbar-dark navbar-color">
+		<a class="navbar-brand" href="/home">Memoir</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mx-auto">
+
+				<li class="nav-item">
+					<a class="nav-link" href="/home">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/profile">Profile</a>
+				</li>
+				
+				<li class="nav-item ">
+					<a class="nav-link" href="/following">Following</a>
+				</li>
+
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Followers</a>
+				</li>
+	
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Log out</a>
+				</li>
+
+	
+	
+	
+			</ul>
+
+			<form class="form-inline" action="/search" method="POST">
+				<input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-light my-sm-0" type="submit">Search</button>
+			</form>
+
+		</div>
+	</nav>
+<% if (user.followers.length==0) { %>
+	<div class="container-fluid mt-3">
+		<div class="row">
+			<div class="col-md-12 text-center mt-5">
+				<h2>No one is following you yet!</h2>
+			</div>
+		</div>
+	</div>
+<% } %>
+	<% for( let i=0; i <user.followers.length; i++ ) { %>
+		
+		<!-- profile card -->
+		<section class="section about-section gray-bg" id="about">
+			<div class="container ">
+				<div class="row align-items-center flex-row-reverse">
+					<div class="col-lg-6">
+						<div class="about-text go-to">
+							<h3 class="dark-color">
+								<%=user.followers[i].name%> | @<%=user.followers[i].userName%>
+							</h3>
+							<h6 class="theme-color lead">
+								<%=user.followers[i].bio%>
+							</h6>
+						</div>
+					</div>
+
+
+					<div class="col-lg-6">
+						<div class="about-avatar">
+							<img class="profile-img" src="<%=user.followers[i].image%> " title="" alt="profile-img">
+						</div>
+					</div>
+				</div>
+				<div class="counter">
+					<div class="row">
+						<div class="col-6 col-lg-3">
+							<div class="count-data text-center">
+								<h6 class="count h2" data-to="500" data-speed="500">
+									<%var count=memoirs.reduce(function(n, val) { var val=val.user._id.toString(); var
+										id=user.followers[i]._id.toString(); return n + (val.localeCompare(id)==0 ); },
+										0);%>
+										<%=count%>
+								</h6>
+
+								<p class="m-0px font-w-600">Memoir</p>
+							</div>
+						</div>
+						<div class="col-6 col-lg-3">
+							<div class="count-data text-center">
+								<h6 class="count h2" data-to="150" data-speed="150">
+									<%=user.followers[i].followings.length%>
+								</h6>
+								<p class="m-0px font-w-600" >Following</p>
+							</div>
+						</div>
+						<div class="col-6 col-lg-3">
+							<div class="count-data text-center">
+								<h6 class="count h2" data-to="850" data-speed="850">
+									<%=user.followers[i].followers.length%>
+								</h6>
+								<p class="m-0px font-w-600">Followers</p>
+							</div>
+						</div>
+						<div class="col-6 col-lg-3">
+							<div class="count-data text-center pt-3">
+								<% if (user.followers[i].followers.includes(user._id)) { %>
+									<form action="/user/unfollow/<%=user.followers[i]._id%>" method="POST">
+										<input type="submit" class="btnDark btn search-color btn-send" value="Unfollow">
+									</form>
+									<% } else { %>
+										<form action="/user/follow/<%=user.followers[i]._id%>" method="POST">
+											<input type="submit" class="btnDark btn search-color btn-send" value="Follow">
+										</form>
+										<%}%>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end profile card  -->
+
+		<% } %>
+</body>

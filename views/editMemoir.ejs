@@ -1,0 +1,137 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Memoir</title>
+
+</head>
+
+<body>
+
+ 
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+	<a class="navbar-brand" href="/home">Memoir</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mx-auto">
+
+			<li class="nav-item">
+				<a class="nav-link" href="/home">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/profile">Profile</a>
+			</li>
+
+            <li class="nav-item active">
+				<a class="nav-link" href="/editMemoir">Edit Memoir</a>
+            </li>
+            <li class="nav-item">
+				<a class="nav-link" href="/logout">Log out</a>
+            </li>
+
+
+
+		</ul>
+
+		<form class="form-inline" action="/search" method="POST">
+			<input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-light my-sm-0" type="submit">Search</button>
+		</form>
+
+	</div>
+</nav>
+
+    <div class="container-fluid bg-light py-3">
+        <form id="contact-form" method="post" action="/memoir/edit/<%=memoir._id%>?_method=PUT" role="form">
+            <div class="controls">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <div class="form-group">
+                            <h3 for="memoir">How is your day going ?</h3>
+                            <textarea id="memoir" name="memoir" class="form-control"
+                                placeholder="How is your day going ? " rows="6"
+                                required="required"> <%=memoir.text%></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="image1">image 1</label>
+                            <input id="image1" type="text" name="image1" class="form-control" placeholder="image link"
+                                value="<%=memoir.image[0]%>">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 justify-content-center">
+                        <div class="form-group">
+                            <label for="image2">image 2</label>
+                            <input id="image2" type="text" name="image2" class="form-control" placeholder="image link"
+                                value="<%=memoir.image[1]%>">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 justify-content-center">
+                        <div class="form-group">
+                            <label for="image3">image 3</label>
+                            <input id="image3" type="text" name="image3" class="form-control" placeholder="image link"
+                                value="<%=memoir.image[2]%>">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 justify-content-center">
+                        <div class="form-group">
+                            <label for="image4">imagee 4</label>
+                            <input id="image4" type="text" name="image4" class="form-control" placeholder="image link"
+                                value="<%=memoir.image[3]%>">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <% if (memoir.visible) { %>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" checked="checked" name="visible"
+                                id="inlineRadio1" value="true">
+                            <label class="form-check-label" for="inlineRadio1">Public</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="visible" id="inlineRadio2" value="false">
+                            <label class="form-check-labe2" for="inlineRadio2">Private</label>
+                        </div>
+                        <% } else { %>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="visible" id="inlineRadio1"
+                                    value="true">
+                                <label class="form-check-label" for="inlineRadio1">Public</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" checked="checked" name="visible"
+                                    id="inlineRadio2" value="false">
+                                <label class="form-check-labe2" for="inlineRadio2">Private</label>
+                            </div>
+                            <% } %>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+
+                    <input type="submit" class="btn search-color btn-send" value="Update Memoir">
+        </form>
+
+        <form class="mt-3" action="/memoir/delete/<%=memoir._id%>?_method=DELETE" method="POST">
+            <input type="submit" class="btn search-color btn-send" value="Delete" />
+        </form>
+    </div>
+
+
+    </div>
+
+    </form>
+    </div>
+
+</body>

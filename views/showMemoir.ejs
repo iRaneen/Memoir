@@ -1,0 +1,119 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/slider.css">
+    <title>Show Memoir</title>
+
+</head>
+
+
+<nav class="navbar navbar-expand-md navbar-dark navbar-color">
+    <a class="navbar-brand" href="/home">Memoir</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Memoir</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log out</a>
+            </li>
+
+
+        </ul>
+
+        <form class="form-inline" action="/search" method="POST">
+
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-light my-sm-0" type="submit">Search</button>
+        </form>
+
+    </div>
+
+</nav>
+
+
+<!-- Show memo  -->
+
+<section class="section about-section gray-bg" id="about">
+    <div class="container ">
+        <div class="cards">
+            <div class="memo">
+                <div class="memo-post-img ">
+                    <div id="slider">
+                        <figure>
+                            
+                            <%var counter=0;memoir.image.forEach(img=>{%>
+
+                                <%  if (img!="" ) {counter++ %>
+                                    
+                                   
+                                    <img src="<%=img%>" alt="">
+            
+                                   
+                                <% } %>
+            
+                            <%})%>
+                            <% if (counter==3) { %>
+                                <img src="<%=memoir.image[0]%>" alt="">
+                                <img src="<%=memoir.image[1]%>" alt="">
+                            <% } else if (counter==2) { %>
+                                <img src="<%=memoir.image[0]%>" alt="">
+                                <img src="<%=memoir.image[1]%>" alt="">
+                                <img src="<%=memoir.image[0]%>" alt="">
+                            <% } else if (counter==1) { %>
+                                <img src="<%=memoir.image[0]%>" alt="">
+                                <img src="<%=memoir.image[0]%>" alt="">
+                                <img src="<%=memoir.image[0]%>" alt="">
+                                <img src="<%=memoir.image[0]%>" alt="">
+                            <% } %>
+
+                            
+                        </figure>
+                    </div>
+                  
+                </div>
+                <div class="blog-post-info ml-5 ">
+                    <div class="blog-post-title  text-center">
+                        <h2>
+                            <%=memoir.user.name%>
+                        </h2>
+                    </div>
+                    <div class="blog-post-date text-center pb-4">
+                        <span>@<%=memoir.createdAt%></span>
+                        <!-- <span>Jun 12 2020</span> -->
+                    </div>
+
+                    <div class="blog-post-desc">
+                        <p>
+                            <%=memoir.text%>
+                        </p>
+                    </div>
+                    <% if (userId==memoir.user._id) { %>
+                        <div class="blog-post-read-more text-center">
+                            <a class="btn btn-primary btn-send" href="/editMemoir/<%=memoir._id%>">Edit memoir</a>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</section>
+<!-- end show memo -->
+
+</body>

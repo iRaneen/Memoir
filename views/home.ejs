@@ -1,0 +1,281 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoir</title>
+    <link rel="stylesheet" href="../css/slider.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-color">
+        <a class="navbar-brand" href="/home">Memoir</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <%if (user) {%>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log out</a>
+                    </li>
+                    <%} else{ %>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signUp">Sign up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+
+                        <%}%>
+
+            </ul>
+
+            <form class="form-inline" action="/search" method="POST">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-light my-sm-0" type="submit">Search</button>
+            </form>
+
+        </div>
+    </nav>
+    <% if (!user) { %>
+
+        <!-- test -->
+        <div class="blog-post">
+            <section class="section about-section gray-bg" id="about">
+                <div class="container containerMemo">
+                    <div class="row align-items-center flex-row-reverse">
+                        <div class="col-lg-6">
+                            <div class="about-avatar">
+                                <img class="profile-img" src="../images/Memoir.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pt-2">
+                            <div class="memo-text go-to ">
+                                <span class="font-weight-bold">memoir</span>
+                                <span class="text-muted ">| ˈmem-​ˌwär |</span>
+                                <br>
+                                noun
+                                <br>
+                                <span class="text-muted "> 1.</span>
+                                a historical account or biography written from personal knowledge.
+                                <br>
+                                <br>
+                                <span class="pt-4">Join us now!</span>
+                                <br>
+                                <a href="/signUp">Sign up</a>
+                                <br>
+                                <div class="pt-3">
+                                      Have Account?
+                                <br>
+                                <a href="/login">Log In</a>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- end test  -->
+
+
+
+        <% } else { %>
+
+            <!-- User homepage -->
+            <%if (randomMemo) {%>
+            <!-- showing random memoir -->
+
+            <!-- Show memo  -->
+
+            <section class="section about-section gray-bg" id="about">
+                <div class="container ">
+                    <div class="cards">
+                        <div class="memo">
+                            <div class="memo-post-img ">
+                                <div id="slider">
+                                    <figure>
+
+                                        <%var counter=0;randomMemo.image.forEach(img=>{%>
+
+                                            <% if (img!="" ) {counter++ %>
+
+
+                                                <img src="<%=img%>" alt="">
+
+
+                                                <% } %>
+
+                                                    <%})%>
+                                                        <% if (counter==3) { %>
+                                                            <img src="<%=randomMemo.image[0]%>" alt="">
+                                                            <img src="<%=randomMemo.image[1]%>" alt="">
+                                                            <% } else if (counter==2) { %>
+                                                                <img src="<%=randomMemo.image[0]%>" alt="">
+                                                                <img src="<%=randomMemo.image[1]%>" alt="">
+                                                                <img src="<%=randomMemo.image[0]%>" alt="">
+                                                                <% } else if (counter==1) { %>
+                                                                    <img src="<%=randomMemo.image[0]%>" alt="">
+                                                                    <img src="<%=randomMemo.image[0]%>" alt="">
+                                                                    <img src="<%=randomMemo.image[0]%>" alt="">
+                                                                    <img src="<%=randomMemo.image[0]%>" alt="">
+                                                                    <% } %>
+
+
+                                    </figure>
+                                </div>
+
+                            </div>
+                            <div class="blog-post-info ml-5 ">
+                                <div class="blog-post-title  text-center">
+                                    <h2 class="dark-color">
+                                        <%=randomMemo.user.name%>
+                                    </h2>
+                                </div>
+                                <div class="blog-post-date text-center pb-4">
+                                    <span class="theme-color">@<%=randomMemo.createdAt%></span>
+                                    <!-- <span>Jun 12 2020</span> -->
+                                </div>
+
+                                <div class="blog-post-desc">
+                                    <p>
+                                        <%=randomMemo.text%>
+                                    </p>
+                                </div>
+                                
+                                    <div class="blog-post-read-more text-center">
+                                        <a class="btn btn-primary btn-send" href="/editMemoir/<%=randomMemo._id%>">Edit
+                                            memoir</a>
+                                    </div>
+                                   
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </section>
+             <% } else { %>
+                <section class="section about-section gray-bg" id="about">
+                    <div class="container ">
+                        <div class="cards">
+                            <div class="memo">
+                                
+                                <div class="blog-post-info ml-5 ">
+                                    <div class="  text-center">
+                                        <h2 class="Welcome-color">
+                                            Welcome to memoir! Share your first memo with us 
+                                        </h2>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+    
+    
+    
+                        </div>
+    
+                    </div>
+                </section>
+                <%}%>
+            <!-- end show memo -->
+
+
+
+            <!-- end of showing random memoir -->
+
+            <div class="col-md-12 text-center mt-3 mb-3">
+
+                <a href="/newMemoir" class="btnDark btn btn-color btn-lg btn-send pl-5 pr-5">How is your day going?</a>
+
+
+            </div>
+
+            </div>
+            </div>
+
+            <!-- end of top  -->
+
+
+            <!-- profile card -->
+
+            <!-- for loop here -->
+            <% memoirs=memoirs.reverse(); %> 
+            <%memoirs.forEach(memoir=> {%>
+
+                <% if((user.followings.includes(memoir.user._id)||user._id==memoir.user.id)&&memoir.visible) { %>
+
+                    <section class="section about-section gray-bg" id="about">
+                        <div class="container ">
+
+                            <!-- profile card -->
+
+                            <div class="cards">
+                                <!-- for loop here -->
+
+                                <div class="blog-post ">
+                                    <div class="blog-post-img">
+                                        <% if(!memoir.image[0]==""){ %> 
+                                            <img src="<%=memoir.image[0]%>" alt="">
+                                            <%} else if(!memoir.image[1]==""){%> 
+                                                    <img src="<%=memoir.image[1]%>" alt="">
+                                                    <%} else if(!memoir.image[2]==""){%> 
+                                                        <img src="<%=memoir.image[2]%>" alt="">
+                                                        <%}else if(!memoir.image[3]==""){%> 
+                                                            <img src="<%=memoir.image[3]%>" alt="">
+                                                            <%}%> 
+                                    </div>
+                                    <div class="blog-post-info ml-5">
+                                        <div class="blog-post-title">
+                                            <h2 class="dark-color">
+                                                <%=memoir.user.name%>
+                                            </h2>
+                                        </div>
+                                        <div class="blog-post-date">
+                                            <span  class="theme-color">@<%=memoir.createdAt%></span>
+                                            <!-- <span>Jun 12 2020</span> -->
+                                        </div>
+
+                                        <div class="blog-post-desc">
+                                            <p class="show-less">
+                                                <%=memoir.text%>
+                                            </p>
+                                        </div>
+                                        <div class="blog-post-read-more">
+                                            <a href="/memoir/<%=memoir._id%>">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- end of foor loop -->
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <% } %>
+                        <%})%>
+
+                            <!-- end of foor loop -->
+                            <!-- end profile card  -->
+
+                            <% } %>
+
+</body>
